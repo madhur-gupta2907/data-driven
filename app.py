@@ -8,7 +8,7 @@ from sklearn.linear_model import LinearRegression
 
 # --- Page Config ---
 st.set_page_config(
-    page_title="Business Insight Dashboard Pro",
+    page_title="Data-Driven Insight Generation using Python",
     page_icon="📊",
     layout="wide",
 )
@@ -41,7 +41,7 @@ apply_theme(st.session_state.theme)
 # --- Header ---
 st.markdown("""
 <div style="background: linear-gradient(135deg, #7c3aed 0%, #ec4899 100%); text-align: center; padding: 2rem; border-radius: 20px; margin-bottom: 2rem;">
-  <h1 style="color: white; margin:0;">🚀 Enterprise Intelligence Hub</h1>
+  <h1 style="color: white; margin:0;">Data-Driven Insight Generation using Python</h1>
   <p style="color: white; opacity: 0.9;">Data Engineering • Analytics • Machine Learning</p>
 </div>
 """, unsafe_allow_html=True)
@@ -54,7 +54,7 @@ def load_and_clean_data(uploaded_file=None):
         if uploaded_file:
             df = pd.read_csv(uploaded_file, encoding='latin1')
         else:
-            df = pd.read_csv('Sample - Superstore.csv', encoding='latin1')
+            df = pd.read_csv('superstore.csv', encoding='latin1')
             
         # Standardize column names (strip spaces)
         df.columns = df.columns.str.strip()
@@ -89,10 +89,10 @@ with st.sidebar:
     
     st.divider()
     view = st.radio("Navigate Modules", [
-        "📊 Overview (Analytics)", 
-        "📈 Sales Trends", 
-        "🤖 ML Predictions", 
-        "🏗️ System Design"
+        "Overview (Analytics)", 
+        "Sales Trends", 
+        "ML Predictions", 
+        "System Design"
     ])
 
 df = load_and_clean_data(uploaded)
@@ -103,7 +103,7 @@ if df.empty or 'Sales' not in df.columns:
     st.stop()
 
 # --- Member 3: Data Analysis ---
-if view == "📊 Overview (Analytics)":
+if view == "Overview (Analytics)":
     st.subheader("Key Performance Indicators")
     c1, c2, c3, c4 = st.columns(4)
     
@@ -125,7 +125,7 @@ if view == "📊 Overview (Analytics)":
             fig = px.box(df, x='Category', y='Profit', color='Category', title="Profitability Distribution")
             st.plotly_chart(fig, width='stretch')
 
-elif view == "📈 Sales Trends":
+elif view == "Sales Trends":
     st.subheader("Temporal Analysis")
     if 'YearMonth' in df.columns:
         trend_df = df.groupby('YearMonth')['Sales'].sum().reset_index()
@@ -133,8 +133,8 @@ elif view == "📈 Sales Trends":
         st.plotly_chart(fig, width='stretch')
 
 # --- Member 4: ML Engineer ---
-elif view == "🤖 ML Predictions":
-    st.subheader("🤖 Monthly Sales Forecasting")
+elif view == "ML Predictions":
+    st.subheader("Monthly Sales Forecasting")
     
     # Aggregating by Month for better R2
     ml_df = df.groupby('YearMonth')['Sales'].sum().reset_index()
@@ -162,10 +162,10 @@ elif view == "🤖 ML Predictions":
     st.write(f"**Model Accuracy (R²):** {model.score(X, y):.4f}")
 
 # --- Member 1: Project Lead ---
-elif view == "🏗️ System Design":
+elif view == "System Design":
     st.subheader("System Architecture")
     st.markdown("""
-    ### 🔄 3-Member Workflow
+    ### 3-Member Workflow
     1. **Member 1 (Lead):** Built the Streamlit routing and UI theme using CSS.
     2. **Member 2 (Eng):** Developed the `load_and_clean_data` pipeline and handled the `Ordinal_Date` conversions.
     3. **Member 3 (Analyst):** Built the KPI logic and interactive Plotly visualizations.
